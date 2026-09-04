@@ -14,3 +14,15 @@ docker container run -it -e "PS1=\h:\w# " jfahrer/myalpine:latest
 
 docker container run jfahrer/myalpine:latest env
 docker container run -e "PS2=> " jfahrer/myalpine:latest env
+
+### 3. More on env vars
+
+app.env
+echo MYVAR=test >> app.env
+echo FOO=bar >> app.env
+
+export OTHERVAR=local-test
+docker container run --env-file app.env -e OTHERVAR alpine:latest env
+
+echo OTHERVAR >> app.env
+docker container run --env-file app.env alpine:latest env
