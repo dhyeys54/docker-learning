@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  font-family: -apple-system, Helvetica, Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #222;
+  text-align: center;
+  padding-top: 60px;
+}
+
+img.logo {
+  width: 120px;
+  height: 120px;
+}
+
+h1 {
+  color: #009639;
+}
