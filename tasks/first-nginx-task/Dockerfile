@@ -9,6 +9,8 @@ RUN rm -rf /var/log/nginx/error.log && ln -s /dev/stderr /var/log/nginx/error.lo
 # COPY tasks/html-files/nginx-html-index/ /var/www/html/
 ADD ./html.tar.gz /var/www/html/
 
+# EXPOSE 80
+
 # VOLUME [ "/test-data" ]
 
 # CMD nginx -g 'daemon off;'
