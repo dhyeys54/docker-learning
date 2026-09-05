@@ -65,6 +65,42 @@ docker container run -d --name pg --env-file db.env postgres:9.6.6-alpine
 docker container run -d --link pg --env-file app.env -p 9292:9292 jfahrer/demo_web_app
 ```
 
-### 7. Try it out
+### Assignment 1
 
-Combine the above: start a Postgres container with credentials via `--env-file`, then start an app container `--link`ed to it, configured with its own `--env-file` pointing at the database host/credentials, and verify it's reachable via its published port.
+* Try it yourself
+* Use a user defined network instead of links
+* Use the same env file for both containers
+* Set the env vars locally and use the -e flag
+  * `"-e POSTGRES_DB" -e "POSTGRES_USER" …` syntax
+
+```
+docker network create ruby-pg
+
+docker container run --rm --name pq --network ruby-pg --env-file "env-files/db-test2.env" -d postgres:alpine
+
+# ruby server image
+
+docker image build -f tasks/webserver-ruby/Dockerfile -t ruby-webserver:latest .
+
+docker container run --rm --name ruby-server --network ruby-pg --env-file "env-files/app-test3.env" -d -p 4567:4567 ruby-webserver:latest
+```
+
+### Assignment 2
+
+* Start multiple instances of your previous server
+* They should all connect to the same database
+* Use different port mappings
+
+```
+docker network create ruby-pg
+
+docker container run --rm --name pg --network ruby-pg --env-file "env-files/app-test3.env" -d postgres:alpine
+
+# ruby server image
+
+docker image build -f tasks/webserver-ruby/Dockerfile -t ruby-webserver:latest .
+
+docker container run --rm --name ruby-server --network ruby-pg --env-file "env-files/app-test3.env" -d -p 4567:4567 ruby-webserver:latest
+
+docker container run --rm --name ruby-server1 --network ruby-pg --env-file "env-files/app-test3.env" -d -p 4568:4567 ruby-webserver:latest
+```
