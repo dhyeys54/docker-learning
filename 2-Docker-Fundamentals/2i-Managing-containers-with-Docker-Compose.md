@@ -20,3 +20,15 @@ docker-compose down
 docker-compose up -d pg
 docker-compose down
 docker volume ls
+
+## 6. Interacting with containers
+
+docker-compose up -d
+docker-compose exec alpine sh
+ping composeexample_pg_1
+ping pg
+exit
+docker-compose stop alpine
+docker-compose rm alpine
+docker-compose up -d
+
