@@ -45,3 +45,5 @@ docker-compose up -d
   * The web app second
 * Use your browser to verify it works
   * http://localhost:4567
+
+## 8. Managing environment variables
