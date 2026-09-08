@@ -4,6 +4,7 @@ require 'socket'
 
 set :bind, '0.0.0.0'
 set :port, 4567
+set :host_authorization, permitted_hosts: []
 
 def db_connect
   PG.connect(
@@ -32,10 +33,19 @@ get '/' do
     [Socket.gethostname, request.ip, request.path]
   )
 
-  result = conn.exec('SELECT server, ip_address, path, created_at FROM requests ORDER BY id DESC LIMIT 10')
-  rows = result.map { |r| "#{r['created_at']} | #{r['server']} | #{r['ip_address']} | #{r['path']}" }.join("\n")
+  result = conn.exec('SELECT server, ip_address, path, created_at FROM requests ORDER BY id DESC')
+  rows = result.map do |r|
+    "<tr><td>#{r['created_at']}</td><td>#{r['server']}</td><td>#{r['ip_address']}</td><td>#{r['path']}</td></tr>"
+  end.join
 
-  "Hello from Ruby! Served by #{Socket.gethostname}\n\nRecent requests:\n#{rows}\n"
+  <<~HTML
+    <h1>Hello from Ruby! Served by #{Socket.gethostname}</h1>
+    <h2>Recent requests</h2>
+    <table border="1" cellpadding="6" cellspacing="0">
+      <tr><th>Created At</th><th>Server</th><th>IP Address</th><th>Path</th></tr>
+      #{rows}
+    </table>
+  HTML
 rescue PG::Error => e
   status 500
   "DB connection failed: #{e.message}\n"
