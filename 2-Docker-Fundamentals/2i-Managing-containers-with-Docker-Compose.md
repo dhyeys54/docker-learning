@@ -12,3 +12,6 @@ https://yaml.org/
 
 docker-compose up
 docker-compose down
+
+## 4. Configuring our database
+
