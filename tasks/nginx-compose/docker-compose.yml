@@ -29,6 +29,8 @@ services:
     build:
       context: ./../webserver-ruby
       dockerfile: Dockerfile
+    depends_on:
+      - pg
     environment:
       - POSTGRES_DB
       - POSTGRES_USER

@@ -47,3 +47,12 @@ docker-compose up -d
   * http://localhost:4567
 
 ## 8. Managing environment variables
+
+## 9. Specifying dependencies
+
+## 10. Limitations of depends_on
+
+condition: service_started
+
+## 11. Integrate the load balancer
+
