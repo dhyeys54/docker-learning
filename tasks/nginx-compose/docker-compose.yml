@@ -1,11 +1,11 @@
 version: '1.0'
 services:
-  web:
-    image: nginx:latest
-    ports:
-      - 80:80
-    volumes:
-      - ./tasks/html-files:/usr/share/nginx/html
+  # web:
+  #   image: nginx:latest
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./tasks/html-files:/usr/share/nginx/html
 
   pg:
     image: postgres:alpine
@@ -39,8 +39,19 @@ services:
     # env_file:
     #   - ./db-test1.env
     #   - ./app-test1.env
+    # ports:
+    #   - 4567:4567
+  
+  lb:
+    image: fangy54/lb:latest
+    build:
+      context: ./../nginx-loadbalancer
+      dockerfile: dockerfile
+    environment:
+      - PROXY_PROTOCOL
+      - PROXY_UPSTREAM
     ports:
-      - 4567:4567
+      - 80:80
 
 volumes:
   pg_data:
