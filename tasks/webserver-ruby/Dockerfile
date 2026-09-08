@@ -4,10 +4,10 @@ WORKDIR /app
 
 RUN apk add --no-cache build-base postgresql-dev
 
-COPY tasks/webserver-ruby/Gemfile .
+COPY Gemfile .
 RUN bundle install
 
-COPY tasks/webserver-ruby/server.rb .
+COPY server.rb .
 
 EXPOSE 4567
 

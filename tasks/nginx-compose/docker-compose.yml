@@ -16,11 +16,21 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql
 
-  alpine:
-    image: alpine:latest
-    stdin_open: true
-    tty: true
-    command: sh
+  # alpine:
+  #   image: alpine:latest
+  #   stdin_open: true
+  #   tty: true
+  #   command: sh
+
+  webapp:
+    image: webserver-ruby
+    build:
+      context: ./../webserver-ruby
+      dockerfile: Dockerfile
+    env_file:
+      - app-test1.env
+    ports:
+      - 4567:4567
 
 volumes:
   pg_data:
