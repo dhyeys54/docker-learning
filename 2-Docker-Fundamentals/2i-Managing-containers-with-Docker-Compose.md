@@ -15,3 +15,8 @@ docker-compose down
 
 ## 4. Configuring our database
 
+## 5. Using a volume
+
+docker-compose up -d pg
+docker-compose down
+docker volume ls
