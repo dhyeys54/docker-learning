@@ -1,0 +1,8 @@
+version: '1.0'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./tasks/html-files:/usr/share/nginx/html
