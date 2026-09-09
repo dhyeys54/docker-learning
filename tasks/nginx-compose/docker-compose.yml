@@ -46,7 +46,9 @@ services:
     image: fangy54/lb:latest
     build:
       context: ./../nginx-loadbalancer
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
+    depends_on:
+      - webapp
     environment:
       - PROXY_PROTOCOL
       - PROXY_UPSTREAM

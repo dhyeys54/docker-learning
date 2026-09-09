@@ -70,3 +70,16 @@ condition: service_started
 * Start the services using docker-compose
 * Use your browser to verify it works
   * http://localhost
+
+## 12. Enhancing the load balancer
+
+## 13. Building the load balancer
+
+docker-compose build
+docker-compose build lb
+docker-compose up --build
+
+## 14. Scaling a service
+
+docker-compose up -d
+docker-compose up -d --scale webapp=5
